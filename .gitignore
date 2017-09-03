@@ -1,0 +1,29 @@
+/.web-server-pid
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+
+# Dist Files
+/web/bundles/
+/web/assets/dist/css/*
+/web/assets/dist/js/*
+!web/assets/dist/css/.gitkeep
+!web/assets/dist/js/.gitkeep
+
+# IDE
+/.idea/
+
+# Vendors
+/node_modules/
+/vendor/
