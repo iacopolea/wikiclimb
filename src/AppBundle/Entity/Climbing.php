@@ -105,6 +105,17 @@ class Climbing
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Spot", inversedBy="climbings")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $spot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $location;
 
     /**
      * Get id
@@ -403,5 +414,38 @@ class Climbing
     {
         return $this->description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSpot()
+    {
+        return $this->spot;
+    }
+
+    /**
+     * @param mixed $spot
+     */
+    public function setSpot(Spot $spot)
+    {
+        $this->spot = $spot;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
 }
 

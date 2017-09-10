@@ -38,9 +38,9 @@ class Area
     /**
      * @var string
      *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity="Region")
      */
-    private $location;
+    private $regions;
 
 
     /**

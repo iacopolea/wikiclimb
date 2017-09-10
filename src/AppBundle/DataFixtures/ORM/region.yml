@@ -1,0 +1,4 @@
+AppBundle\Entity\Region:
+    region_{1..30}:
+        name (unique): <region()>
+        nation: "@nation_*"

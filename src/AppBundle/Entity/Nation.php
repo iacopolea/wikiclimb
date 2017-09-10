@@ -29,11 +29,9 @@ class Nation
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="Region", mappedBy="nation")
      */
-    private $location;
+    private $regions;
 
 
     /**

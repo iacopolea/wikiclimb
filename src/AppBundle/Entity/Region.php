@@ -28,12 +28,12 @@ class Region
      */
     private $name;
 
+
     /**
-     * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Nation", inversedBy="regions")
+     * @ORM\JoinColumn()
      */
-    private $location;
+    private $nation;
 
 
     /**

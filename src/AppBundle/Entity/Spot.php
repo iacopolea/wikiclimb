@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Spot
 {
+    public function __construct()
+    {
+        $this->climbings = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -77,6 +83,11 @@ class Spot
      */
     private $face;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Climbing", mappedBy="spot")
+     * @ORM\OrderBy({"positionNumber" = "ASC"})
+     */
+    private $climbings;
 
     /**
      * Get id
@@ -279,5 +290,14 @@ class Spot
     {
         return $this->face;
     }
+
+    /**
+     * @return ArrayCollection|Climbing[]
+     */
+    public function getClimbings()
+    {
+        return $this->climbings;
+    }
+
 }
 
