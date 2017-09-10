@@ -78,6 +78,11 @@ class Location
     private $region;
 
     /**
+     * @ORM\OneToMany(targetEntity="Spot", mappedBy="location")
+     */
+    private $spots;
+
+    /**
      * Get id
      *
      * @return int

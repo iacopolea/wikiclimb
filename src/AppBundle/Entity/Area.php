@@ -53,6 +53,11 @@ class Area
      */
     private $locations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Spot", mappedBy="location")
+     */
+    private $spots;
+
 
     /**
      * Get id

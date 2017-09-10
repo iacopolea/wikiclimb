@@ -65,9 +65,9 @@ class Spot
     /**
      * @var string
      *
-     * @ORM\Column(name="ranking", type="decimal", precision=5, scale=4, nullable=true)
+     * @ORM\Column(name="rating", type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $ranking;
+    private $rating;
 
     /**
      * @var int
@@ -88,6 +88,18 @@ class Spot
      * @ORM\OrderBy({"positionNumber" = "ASC"})
      */
     private $climbings;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="spots")
+     * @ORM\JoinColumn()
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Area", inversedBy="spots")
+     * @ORM\JoinColumn()
+     */
+    private $area;
 
     /**
      * Get id
@@ -220,27 +232,27 @@ class Spot
     }
 
     /**
-     * Set ranking
+     * Set rating
      *
-     * @param string $ranking
+     * @param string $rating
      *
      * @return Spot
      */
-    public function setRanking($ranking)
+    public function setRating($rating)
     {
-        $this->ranking = $ranking;
+        $this->rating = $rating;
 
         return $this;
     }
 
     /**
-     * Get ranking
+     * Get rating
      *
      * @return string
      */
-    public function getRanking()
+    public function getRating()
     {
-        return $this->ranking;
+        return $this->rating;
     }
 
     /**
@@ -299,5 +311,36 @@ class Spot
         return $this->climbings;
     }
 
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location $location
+     */
+    public function setLocation(Location $location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return Area
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * @param Area $area
+     */
+    public function setArea(Area $area)
+    {
+        $this->area = $area;
+    }
 }
 
