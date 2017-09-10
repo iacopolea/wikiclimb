@@ -1,3 +1,0 @@
-AppBundle\Entity\Nation:
-    nation_{1..10}:
-        name (unique): <country()>

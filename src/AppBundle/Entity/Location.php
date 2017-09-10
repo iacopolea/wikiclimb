@@ -38,9 +38,9 @@ class Location
     /**
      * @var string
      *
-     * @ORM\Column(name="rate", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="rate", type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $rate;
+    private $rating;
 
     /**
      * @var string
@@ -64,12 +64,18 @@ class Location
     private $sketchImage;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Area", inversedBy="locations")
+     * @ORM\JoinColumn()
+     * @ORM\OrderBy({"name" = "ASC"})
      */
-    private $location;
+    private $area;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Region", inversedBy="locations")
+     * @ORM\JoinColumn()
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    private $region;
 
     /**
      * Get id
@@ -130,27 +136,27 @@ class Location
     }
 
     /**
-     * Set rate
+     * Set rating
      *
-     * @param string $rate
+     * @param string $rating
      *
      * @return Location
      */
-    public function setRate($rate)
+    public function setRating($rating)
     {
-        $this->rate = $rate;
+        $this->rating = $rating;
 
         return $this;
     }
 
     /**
-     * Get rate
+     * Get rating
      *
      * @return string
      */
-    public function getRate()
+    public function getRating()
     {
-        return $this->rate;
+        return $this->rating;
     }
 
     /**
@@ -226,27 +232,37 @@ class Location
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Location
+     * @return Area
      */
-    public function setLocation($location)
+    public function getArea()
     {
-        $this->location = $location;
-
-        return $this;
+        return $this->area;
     }
 
     /**
-     * Get location
-     *
-     * @return string
+     * @param Area $area
      */
-    public function getLocation()
+    public function setArea(Area $area)
     {
-        return $this->location;
+        $this->area = $area;
     }
+
+    /**
+     * @return Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region $region
+     */
+    public function setRegion(Region $region)
+    {
+        $this->region = $region;
+    }
+
+
 }
 

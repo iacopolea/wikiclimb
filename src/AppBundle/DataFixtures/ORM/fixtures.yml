@@ -1,0 +1,33 @@
+Appbundle\Entity\User:
+    user_{1..30}:
+        username: <username()>
+        email (unique): <email()>
+        enabled: <boolean(85)>
+        plainPassword: <password()>
+
+AppBundle\Entity\Country:
+    country_{1..3}:
+        name (unique): <country()>
+
+AppBundle\Entity\Region:
+    region_{1..9}:
+        name (unique): <state()>
+        country: "@country_*"
+
+AppBundle\Entity\Area:
+    area_{1..30}:
+        name (unique): <city()>
+        description: <text($maxNbChars = 200)>
+        regions: <numberBetween(1, 2)>x @region_*
+
+AppBundle\Entity\Location:
+    location_{1..90}:
+        name (unique): <city()>
+        description: <text($maxNbChars = 200)>
+        rating: <numberBetween(1, 5)>
+        approach: <realText($maxNbChars = 255, $indexSize = 2)>
+        image: imageUrl($width = 1440, $height = 960)
+        sketchImage: imageUrl($width = 1440, $height = 960)
+        area: "@area_*"
+        region: "@region_*"
+

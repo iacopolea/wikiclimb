@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Region
 {
+
+    function __construct(){
+        $this->areas = new ArrayCollection();
+        $this->locations = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -30,10 +37,23 @@ class Region
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Nation", inversedBy="regions")
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="regions")
      * @ORM\JoinColumn()
+     * @ORM\OrderBy({"name" = "ASC"})
      */
-    private $nation;
+    private $country;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Area", mappedBy="regions")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    private $areas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="region")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    private $locations;
 
 
     /**
@@ -71,27 +91,37 @@ class Region
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Region
+     * @return Country
      */
-    public function setLocation($location)
+    public function getCountry()
     {
-        $this->location = $location;
+        return $this->country;
+    }
 
-        return $this;
+    /**
+     * @param Country $country
+     */
+    public function setCountry(Country $country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * @return ArrayCollection | Area[]
+     */
+    public function getAreas()
+    {
+        return $this->areas;
     }
 
     /**
      * Get location
      *
-     * @return string
+     * @return ArrayCollection|Location[]
      */
     public function getLocation()
     {
-        return $this->location;
+        return $this->locations;
     }
 }
 

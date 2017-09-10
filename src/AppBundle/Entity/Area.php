@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Area
 {
+    function __construct(){
+        $this->regions = new ArrayCollection();
+        $this->locations = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -38,9 +44,14 @@ class Area
     /**
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="Region")
+     * @ORM\ManyToMany(targetEntity="Region", inversedBy="areas")
      */
     private $regions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="area")
+     */
+    private $locations;
 
 
     /**
@@ -102,27 +113,36 @@ class Area
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Area
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
      * Get location
      *
-     * @return string
+     * @return ArrayCollection|Location[]
      */
-    public function getLocation()
+    public function getLocations()
     {
-        return $this->location;
+        return $this->locations;
+    }
+
+
+    /**
+     * @return ArrayCollection|Region[]
+     */
+    public function getRegions()
+    {
+        return $this->regions;
+    }
+
+
+    public function addRegion(Region $region)
+    {
+        if ($this->regions->contains($region)) {
+            return;
+        }
+        $this->regions[] = $region;
+    }
+
+    public function removeRegion(Region $region)
+    {
+        $this->regions->removeElement($region);
     }
 }
 

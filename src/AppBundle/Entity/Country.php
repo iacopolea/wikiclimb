@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Nation
+ * Country
  *
- * @ORM\Table(name="nations")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\NationRepository")
+ * @ORM\Table(name="countries")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
  */
-class Nation
+class Country
 {
     /**
      * @var int
@@ -29,7 +29,8 @@ class Nation
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Region", mappedBy="nation")
+     * @ORM\OneToMany(targetEntity="Region", mappedBy="country")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $regions;
 
@@ -49,7 +50,7 @@ class Nation
      *
      * @param string $name
      *
-     * @return Nation
+     * @return Country
      */
     public function setName($name)
     {
@@ -69,27 +70,21 @@ class Nation
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Nation
+     * @return Region
      */
-    public function setLocation($location)
+    public function getRegions()
     {
-        $this->location = $location;
-
-        return $this;
+        return $this->regions;
     }
 
     /**
-     * Get location
-     *
-     * @return string
+     * @param mixed $regions
      */
-    public function getLocation()
+    public function setRegions($regions)
     {
-        return $this->location;
+        $this->regions = $regions;
     }
+
+
 }
 
